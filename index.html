@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NARA AI - Sahabat Virtual</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f0ff;
+      color: #292344;
+    }
+    header {
+      background: #7047a8;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+    header h1 { margin: 0 0 8px; }
+    main {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 15px;
+    }
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 4px 15px #0001;
+    }
+    #chat {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e5def1;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 15px 0;
+      background: #fcfaff;
+    }
+    .message {
+      padding: 10px 13px;
+      border-radius: 12px;
+      margin: 8px 0;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .nara { background: #eee6fa; }
+    .user { background: #e2f3e8; text-align: right; }
+    .controls { display: flex; gap: 8px; }
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #cfc4df;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 17px;
+      background: #7047a8;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #766b87;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌸 NARA AI</h1>
+    <p>Sahabat Virtual yang Siap Menemani</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Assalamualaikum! 💜</h2>
+      <p>Halo, aku Nara. Senang bisa berkenalan denganmu.</p>
+
+      <div id="chat">
+        <div class="message nara">
+          Nara: Waalaikumsalam! Ada yang bisa Nara bantu hari ini? 😊
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="message" placeholder="Tulis pesanmu..." />
+        <button onclick="sendMessage()">Kirim</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    NARA AI © 2026 | Created by Aa Umeng 💜
+  </footer>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("message");
+      const chat = document.getElementById("chat");
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const user = document.createElement("div");
+      user.className = "message user";
+      user.textContent = "Kamu: " + text;
+      chat.appendChild(user);
+
+      const reply = document.createElement("div");
+      reply.className = "message nara";
+      reply.textContent =
+        "Nara: Terima kasih sudah bercerita. Nara siap menemanimu. 💜";
+      chat.appendChild(reply);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
