@@ -102,28 +102,55 @@
     NARA AI © 2026 | Created by Aa Umeng 💜
   </footer>
 
-  <script>
-    function sendMessage() {
-      const input = document.getElementById("message");
-      const chat = document.getElementById("chat");
-      const text = input.value.trim();
+  
+<script>
+  async function sendMessage() {
+    const input = document.getElementById("message");
+    const chat = document.getElementById("chat");
+    const text = input.value.trim();
 
-      if (!text) return;
+    if (!text) return;
 
-      const user = document.createElement("div");
-      user.className = "message user";
-      user.textContent = "Kamu: " + text;
-      chat.appendChild(user);
+    const user = document.createElement("div");
+    user.className = "message user";
+    user.textContent = "Kamu: " + text;
+    chat.appendChild(user);
 
-      const reply = document.createElement("div");
-      reply.className = "message nara";
+    input.value = "";
+
+    const reply = document.createElement("div");
+    reply.className = "message nara";
+    reply.textContent = "Nara sedang berpikir... 💜";
+    chat.appendChild(reply);
+    chat.scrollTop = chat.scrollHeight;
+
+    try {
+      const response = await fetch(
+        "https://nara-ai-api.umenx-rhu-sman-93.workers.dev/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: text })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Terjadi kesalahan.");
+      }
+
+      reply.textContent = "Nara: " + data.reply;
+    } catch (error) {
       reply.textContent =
-        "Nara: Terima kasih sudah bercerita. Nara siap menemanimu. 💜";
-      chat.appendChild(reply);
-
-      input.value = "";
-      chat.scrollTop = chat.scrollHeight;
+        "Nara: Maaf, koneksi sedang bermasalah. Coba lagi ya. 💜";
     }
-  </script>
+
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>
+
 </body>
 </html>
